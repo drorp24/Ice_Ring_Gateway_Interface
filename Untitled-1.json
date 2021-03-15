@@ -1,0 +1,22 @@
+[
+  {
+    "delivery_request_id": "del-56",
+    "customer_delivery_ids": [
+      {
+        "customer_delivery_id": "custom_del_9",
+        "customer_delivery_plan_ids": ["custom_del_plan5", "custom_del_plan6"]
+      }
+    ],
+    "option_id": "option8"
+  },
+  {
+    "delivery_request_id": "del-50",
+    "customer_delivery_ids": [
+      {
+        "customer_delivery_id": "custom_del_9",
+        "customer_delivery_plan_ids": ["custom_del_plan5", "custom_del_plan6"]
+      }
+    ],
+    "option_id": "option8"
+  }
+]

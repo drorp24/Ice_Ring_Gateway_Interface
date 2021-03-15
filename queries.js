@@ -1,86 +1,96 @@
-const Pool = require('pg').Pool
+const Pool = require('pg').Pool;
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'ring',
-  password: 'postgres',
+  database: 'Ring',
+  password: '29092012',
   port: 5432,
-})
-
+});
 
 const getLatestRunIds = (request, response) => {
-  const amount = parseInt(request.params.amount) || 10
-  pool.query(`Select * from manager_suppliers_category_status t
+  const amount = parseInt(request.params.amount) || 10;
+  pool.query(
+    `Select * from manager_suppliers_category_status t
               ORDER by t.update_time::timestamp DESC
-              LIMIT $1`,[amount],
-   (error, results) => {
-    if (error) {
-      throw error
+              LIMIT $1`,
+    [amount],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
     }
-    response.status(200).json(results.rows)
-  })
-}
+  );
+};
 
 const getLatestPublishedRunIds = (request, response) => {
-  const amount = parseInt(request.params.amount) || 10
-  pool.query(`Select * from manager_suppliers_category_status t
+  const amount = parseInt(request.params.amount) || 10;
+  pool.query(
+    `Select * from manager_suppliers_category_status t
               where t.publish_time is not null
               ORDER by t.update_time::timestamp DESC
-              LIMIT $1`,[amount],
-   (error, results) => {
-    if (error) {
-      throw error
+              LIMIT $1`,
+    [amount],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
     }
-    response.status(200).json(results.rows)
-  })
-}
+  );
+};
 
 const getAllRecommendations = (request, response) => {
-    pool.query('SELECT * FROM public.allocation_recommendations', (error, results) => {
+  pool.query(
+    'SELECT * FROM public.allocation_recommendations',
+    (error, results) => {
       if (error) {
-        throw error
+        throw error;
       }
-      response.status(200).json(results.rows)
-    })
-  }
+      response.status(200).json(results.rows);
+    }
+  );
+};
 
-  const getAllRecommendationsByRunId = (request, response) => {
-    const run_id = request.params.run_id
-  
-    pool.query('SELECT * FROM public.allocation_recommendations WHERE run_id = $1', [run_id], (error, results) => {
+const getAllRecommendationsByRunId = (request, response) => {
+  const run_id = request.params.run_id;
+
+  pool.query(
+    'SELECT * FROM public.allocation_recommendations WHERE run_id = $1',
+    [run_id],
+    (error, results) => {
       if (error) {
-        throw error
+        throw error;
       }
-      response.status(200).json(results.rows)
-    })
-  }
+      response.status(200).json(results.rows);
+    }
+  );
+};
 
+const approveRecommendationsById = (request, response) => {
+  const id = parseInt(request.params.id);
+  const { status, reason } = request.body;
 
-  const approveRecommendationsById= (request, response) => {
-    const id = parseInt(request.params.id)
-    const { status, reason } = request.body
-  
-    pool.query(
-       `
+  pool.query(
+    `
         UPDATE public.allocation_recommendations
         SET status = $2
         WHERE  id = $1
-       `
-     ,
-      [id,status],
-      (error, results) => {
-        if (error) {
-          throw error
-        }
-        response.status(200).send(`Allocation Modified  modified with ID: ${id}`)
+       `,
+    [id, status],
+    (error, results) => {
+      if (error) {
+        throw error;
       }
-    )
-  }
+      response.status(200).send(`Allocation Modified  modified with ID: ${id}`);
+    }
+  );
+};
 
-
-  const getDirectivesByRunId = (request, response) => {
-    const run_id = request.params.run_id
-    pool.query(`
+const getDirectivesByRunId = (request, response) => {
+  const run_id = request.params.run_id;
+  pool.query(
+    `
     with selected_run as (
 			select * from manager_suppliers_category_status
   			where id=$1
@@ -89,18 +99,21 @@ const getAllRecommendations = (request, response) => {
     select sc.id,name,sc.update_time,data::json->'supplier_category_directives' as directives from suppliers_categories sc
            join selected_run sr on sc.next_data_version=sr.suppliers_category_version::numeric
 		   where sc.id=sr.suppliers_category_id
-    `
-    , [run_id], (error, results) => {
+    `,
+    [run_id],
+    (error, results) => {
       if (error) {
-        throw error
+        throw error;
       }
-      response.status(200).json(results.rows)
-    })
-  }
+      response.status(200).json(results.rows);
+    }
+  );
+};
 
-  const getResourcesByRunId = (request, response) => {
-    const run_id = request.params.run_id
-    pool.query(`
+const getResourcesByRunId = (request, response) => {
+  const run_id = request.params.run_id;
+  pool.query(
+    `
     with selected_run as (
 			select * from manager_suppliers_category_status
       where id=$1
@@ -117,20 +130,21 @@ const getAllRecommendations = (request, response) => {
            and (to_timestamp(sr.update_time,'YYYY-MM-DDTHH24:MI:SS')-INTERVAL '24' HOUR )< Date(fa.start_time)
            and fa.next_data_version=sr.fleet_allocation_version::numeric
 		  
-    `
-    , [run_id], (error, results) => {
+    `,
+    [run_id],
+    (error, results) => {
       if (error) {
-        throw error
+        throw error;
       }
-      response.status(200).json(results.rows)
-    })
-  }
+      response.status(200).json(results.rows);
+    }
+  );
+};
 
-
-
-  const getRequestsByRunId = (request, response) => {
-    const run_id = request.params.run_id
-    pool.query(`
+const getRequestsByRunId = (request, response) => {
+  const run_id = request.params.run_id;
+  pool.query(
+    `
     with requests_with_location as (
       SELECT *, st_geomfromgeojson(arr->> 'geojson') as locations
     FROM public.delivery_requests dr, json_array_elements(dr.options_locations) as arr
@@ -154,24 +168,24 @@ const getAllRecommendations = (request, response) => {
     and (to_timestamp(sr.update_time,'YYYY-MM-DDTHH24:MI:SS')+INTERVAL '6' HOUR )< to_timestamp(dr.start_time,'YYYY-MM-DD HH24:MI:SS') ) 
     and dr.next_data_version<=sr.delivery_requests_version
 
-    `
-    , [run_id], (error, results) => {
+    `,
+    [run_id],
+    (error, results) => {
       if (error) {
-        throw error
+        throw error;
       }
-      response.status(200).json(results.rows)
-    })
-  }
+      response.status(200).json(results.rows);
+    }
+  );
+};
 
-
-
-  module.exports = {
-    getLatestPublishedRunIds,
-    getLatestRunIds,
-    getAllRecommendations,
-    getAllRecommendationsByRunId,
-    approveRecommendationsById,
-    getDirectivesByRunId,
-    getRequestsByRunId,
-    getResourcesByRunId
-  }
+module.exports = {
+  getLatestPublishedRunIds,
+  getLatestRunIds,
+  getAllRecommendations,
+  getAllRecommendationsByRunId,
+  approveRecommendationsById,
+  getDirectivesByRunId,
+  getRequestsByRunId,
+  getResourcesByRunId,
+};
