@@ -1,0 +1,36 @@
+{
+  "id": "fleet_al12",
+  "unit_id": "drone_loading_dock_1",
+  "supplier_categories": [
+    {
+      "campaigns": [{ "id": "ABC42342" }],
+      "supplier_category_directives": { "number_of_drones_formation": 2 }
+    }
+  ],
+  "start_time": { "datestamp": null, "format": "2021-03-03T19:40:52+02:00" },
+  "end_time": { "datestamp": null, "format": "2021-03-04T01:40:52+02:00" },
+  "number_of_drones_for_supplier_category": 40,
+  "related_supplier_categories_ids": ["sup_cat_1"],
+  "drone_loading_dock": {
+    "id": "drone_loading_dock_1",
+    "name": "drone_loading_dock_1",
+    "max_usage_per_day": 8,
+    "drone_type": { "id": "dr_type_1", "name": "drone_type_1" },
+    "relevant_packages": [
+      { "type": "LARGE", "name": "pkg1large", "is_auction_support": true },
+      { "type": "LARGE", "name": "pkg1large", "is_auction_support": true },
+      { "type": "LARGE", "name": "pkg2small", "is_auction_support": true },
+      { "type": "LARGE", "name": "pkg3medium", "is_auction_support": true },
+      { "type": "LARGE", "name": "pkg4medium", "is_auction_support": true }
+    ],
+    "round_trip_without_package_configuration_change": {
+      "timestamp": "1614771652250"
+    },
+    "round_trip_with_package_configuration_change": {
+      "timestamp": "1614771652250"
+    },
+    "configuration_time_for_supplier_category_change": {
+      "timestamp": "1614771652250"
+    }
+  }
+}

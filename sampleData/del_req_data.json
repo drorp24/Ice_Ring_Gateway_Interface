@@ -1,0 +1,109 @@
+{
+  "id": "del-26",
+  "score": 60,
+  "is_relative": true,
+  "campaign_id": "ABC42342",
+  "delivery_drop_point": { "center_x": 33.333, "center_y": 44.44 },
+  "supplier_categories": {
+    "id": "sup_cat_1",
+    "supplier_category": "1234BBBBrrere",
+    "supplier_category_directives": {
+      "local_flight_districs": [
+        {
+          "local_flight_district": {
+            "id": "zone3",
+            "category": "zoneA",
+            "sub_category": "subzoneAB",
+            "geojson": "{\"type\": \"Polygon\", \"coordinates\": [[[34.058973, 30.921076], [35.058899, 30.921076], [35.058899, 31.756196], [34.058973, 31.756196], [34.058973, 30.921076]]]}"
+          }
+        },
+        {
+          "local_flight_district": {
+            "id": "zone2",
+            "category": "zoneA",
+            "sub_category": "subzoneAB",
+            "geojson": "{\"type\": \"Polygon\", \"coordinates\": [[[35.005491, 32.045333], [35.782906, 32.045333], [35.782906, 32.745703], [35.005491, 32.745703], [35.005491, 32.045333]]]}"
+          }
+        },
+        {
+          "local_flight_district": {
+            "id": "zone1",
+            "category": "zoneA",
+            "sub_category": "subzoneAB",
+            "geojson": "{\"type\": \"Polygon\", \"coordinates\": [[[35.038456, 32.893426], [35.719724, 32.893426], [35.719724, 33.332823], [35.038456, 33.332823], [35.038456, 32.893426]]]}"
+          }
+        }
+      ]
+    }
+  },
+  "is_without_planning": true,
+  "delivery_options": [
+    {
+      "id": "option4",
+      "priority": 10,
+      "related_delivery_requests_id": "del-26",
+      "customer_delivery_table": []
+    },
+    {
+      "id": "option5",
+      "priority": 3,
+      "related_delivery_requests_id": "del-26",
+      "customer_delivery_table": [
+        {
+          "delivery_option_id": "option5",
+          "customer_delivery_id": "custom_del_9",
+          "customer_deliveries": [
+            {
+              "package_id": "pkg4",
+              "package": {
+                "id": "pkg4",
+                "name": "pkg4medium",
+                "type": "LARGE"
+              },
+              "package_delivery_plans": [
+                {
+                  "id": "custom_del_plan5",
+                  "number_of_packages": 4,
+                  "drop_point": {
+                    "center_x": 30.66697062,
+                    "center_y": 34.28731581099999
+                  },
+                  "drop_angle": 4,
+                  "drop_direction": 30,
+                  "drop_speed": "LOW"
+                },
+                {
+                  "id": "custom_del_plan6",
+                  "number_of_packages": 4,
+                  "drop_point": {
+                    "center_x": 30.76647062,
+                    "center_y": 34.297385811
+                  },
+                  "drop_angle": 10,
+                  "drop_direction": 10,
+                  "drop_speed": "HIGH"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "start_time": { "format": "09:59:53+02:00" },
+      "end_time": { "format": "10:59:53+02:00" },
+      "start_date": { "format": "2021-03-08" },
+      "end_date": { "format": "2021-03-08" },
+      "remark": "some REmark"
+    },
+    {
+      "start_time": { "format": "10:59:53+02:00" },
+      "end_time": { "format": "11:59:53+02:00" },
+      "start_date": { "format": "2021-03-08" },
+      "end_date": { "format": "2021-03-08" },
+      "remark": "some REmark"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "id": "sup_cat_1",
+  "name": "Kate Chopin",
+  "campaigns": [{ "name": "Campaign 1" }],
+  "loading_docks": [
+    {
+      "id": "drone_loading_dock_1",
+      "name": "drone_loading_dock_1",
+      "max_usage_per_day": 8,
+      "drone_type_id": "dr_type_1",
+      "drone_type": { "id": "dr_type_1", "name": "drone_type_1" },
+      "drone_loading_station": [
+        {
+          "id": "station_1",
+          "station_location": {
+            "center_x": 34.354878049,
+            "center_y": 31.3934091
+          }
+        }
+      ],
+      "relevant_packages": [
+        { "id": "pkg1", "type": "LARGE", "name": "pkg1large" },
+        { "id": "pkg1", "type": "LARGE", "name": "pkg1large" },
+        { "id": "pkg2", "type": "LARGE", "name": "pkg2small" },
+        { "id": "pkg3", "type": "LARGE", "name": "pkg3medium" },
+        { "id": "pkg4", "type": "LARGE", "name": "pkg4medium" }
+      ]
+    }
+  ],
+  "supplier_category_directives": {
+    "customer_delivery_unit_id": "cust_unit_1",
+    "supplier_category_id": "sup_cat_1",
+    "danger_flight_area_policy": [
+      {
+        "danger_flight_area": {
+          "type": "Danger1",
+          "point": { "center_x": 33.195171, "center_y": 35.20619 },
+          "radius": 100,
+          "status": "WARM"
+        },
+        "hot_range": 10,
+        "medium_range": 100,
+        "cold_range": 1000
+      },
+      {
+        "danger_flight_area": {
+          "type": "Danger2",
+          "point": { "center_x": 33.295171, "center_y": 35.30619 },
+          "radius": 100,
+          "status": "COLD"
+        },
+        "hot_range": 10,
+        "medium_range": 100,
+        "cold_range": 1000
+      },
+      {
+        "danger_flight_area": {
+          "type": "Danger1",
+          "point": { "center_x": 33.395171, "center_y": 35.30619 },
+          "radius": 100,
+          "status": "HOT"
+        },
+        "hot_range": 10,
+        "medium_range": 100,
+        "cold_range": 1000
+      },
+      {
+        "danger_flight_area": {
+          "type": "Danger1",
+          "point": { "center_x": 33.495171, "center_y": 35.40619 },
+          "radius": 50,
+          "status": "WARM"
+        },
+        "hot_range": 10,
+        "medium_range": 100,
+        "cold_range": 1000
+      }
+    ],
+    "local_flight_districs": [
+      {
+        "max_drones_formations": 10,
+        "local_flight_district": {
+          "id": "zone3",
+          "sub_category": "subzoneAB",
+          "geojson": "{\"type\": \"Polygon\", \"coordinates\": [[[34.058973, 30.921076], [35.058899, 30.921076], [35.058899, 31.756196], [34.058973, 31.756196], [34.058973, 30.921076]]]}"
+        }
+      },
+      {
+        "max_drones_formations": 10,
+        "local_flight_district": {
+          "id": "zone2",
+          "sub_category": "subzoneAB",
+          "geojson": "{\"type\": \"Polygon\", \"coordinates\": [[[35.005491, 32.045333], [35.782906, 32.045333], [35.782906, 32.745703], [35.005491, 32.745703], [35.005491, 32.045333]]]}"
+        }
+      },
+      {
+        "max_drones_formations": 10,
+        "local_flight_district": {
+          "id": "zone1",
+          "sub_category": "subzoneAB",
+          "geojson": "{\"type\": \"Polygon\", \"coordinates\": [[[35.038456, 32.893426], [35.719724, 32.893426], [35.719724, 33.332823], [35.038456, 33.332823], [35.038456, 32.893426]]]}"
+        }
+      }
+    ]
+  }
+}
